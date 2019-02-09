@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RecruitPNG.Models.Job>
+
+    @{
+    ViewData["Title"] = "My jobs";
+    }
+    <link rel="stylesheet" type="text/css" href="~/assets/cdn/jquery.dataTables.min.css">
+    <p>
+        <a asp-action="Create" asp-controller="Jobs" asp-area="" class="btn btn-primary btn-sm">Create new</a>
+    </p>
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="Jobs" asp-area="" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-controller="Jobs" asp-area="" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete your job?');"><i class="fa fa-trash"></i>Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @section Scripts {
+    <script src="~/assets/cdn/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="~/assets/cdn/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                responsive: true,
+                "language": {
+                    //"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json"
+                }
+            });
+        });
+        </script>
+    }

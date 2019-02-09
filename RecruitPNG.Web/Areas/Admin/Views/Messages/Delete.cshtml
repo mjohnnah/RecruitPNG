@@ -1,0 +1,95 @@
+﻿@model RecruitPNG.Models.Message
+
+@{
+    ViewData["Title"] = "Delete Message";
+}
+<h3>Are you sure you want to delete this message?</h3>
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FromName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FromName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ToName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ToName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRead)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsRead)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsApproved)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IPAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IPAddress)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Submit" class="btn btn-sm btn-danger" /> 
+        <a asp-action="Index" class="btn btn-sm btn-primary">Cancel</a>
+    </form>
+</div>

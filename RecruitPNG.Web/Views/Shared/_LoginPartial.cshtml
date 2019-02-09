@@ -1,0 +1,224 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<RecruitPNG.Models.ApplicationUser> SignInManager
+@inject UserManager<RecruitPNG.Models.ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    var profilePhoto = UserManager.Users.FirstOrDefault(f => f.UserName == User.Identity.Name)?.Photo;
+    if (string.IsNullOrEmpty(profilePhoto)) {
+        profilePhoto = "/images/profile_photo.png";
+    }
+    else
+    {
+    profilePhoto = "/uploads/profiles/" + profilePhoto;
+    }
+
+    
+
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("Company"))
+            {
+                <li style="margin-left:3px;">
+                    <button type="button" onclick="window.location='/Jobs/Create'" class="btn btn-default btn-sm">
+                        <i class="icon-bell"></i>
+                        Crate job
+                    </button>
+
+                </li>
+            }
+            @if (User.IsInRole("Candidate"))
+            {
+                <li style="margin-left:3px;">
+                    <button type="button" onclick="window.location='/Resumes/Create'" class="btn btn-default btn-sm">
+                        <i class="icon-bell"></i>
+                        Create CV
+                    </button>
+
+                </li>
+            }
+            <!-- BEGIN INBOX DROPDOWN -->
+            <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <span class="circle">@(ViewBag.MessageCount ?? 0)</span>
+                    <span class="corner"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="external">
+                        <h3>
+
+                            You have <strong>@ViewBag.MessageCount </strong> Message(s)
+
+                        </h3>
+                        @if (User.IsInRole("Candidate"))
+                        {
+                            <a asp-controller="Messages" asp-action="MyMessagesSentToMyResumes">View Messages</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Messages" asp-action="MyMessagesSentToMyCompanies">Messages</a>
+                        }
+                    </li>
+                    <li>
+                        <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                            @if (ViewBag.Messages != null)
+                            {
+                                @foreach (var item in (IEnumerable<Message>)ViewBag.Messages)
+                                {
+                                    <li>
+                                        <a href="#">
+                                            <span class="photo">
+                                                <img src="" class="img-circle" alt="" style="width:40px;">
+                                            </span>
+                                            <span class="subject">
+                                                <span class="from"> @item.FromName </span>
+                                                <span class="time">@string.Format("{0:dd.MM.yyyy}", item.CreateDate) </span>
+                                            </span>
+                                            <span class="message"> @(item.Description.Length > 50 ? item.Description.Substring(0, 50) : item.Description)</span>
+                                        </a>
+                                    </li>
+                                }
+
+                            }
+
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <!-- END INBOX DROPDOWN -->
+            <!-- ACCOUNT/USER DROPDOWN -->
+            <li class="dropdown dropdown-user dropdown-dark">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+                    <img alt="Profile Photo" class="img-circle" src="@profilePhoto" style="width:40px;">
+                    @{
+                        var usr = await UserManager.FindByNameAsync(User.Identity.Name);
+                    }
+                    @if (usr != null && !string.IsNullOrEmpty(usr.FullName))
+                    {
+                        <span class="username username-hide-mobile">@usr.FullName</span>
+                    }
+                    else
+                    {
+                        <span class="username username-hide-mobile">@UserManager.GetUserName(User)</span>
+                    }
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-default">
+                    <li>
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">
+                            <i class="icon-user"></i> Profile
+                        </a>
+                    </li>
+                    @if (User.IsInRole("Company"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Messages" asp-action="MyMessagesSentToMyCompanies">
+                                <i class="icon-envelope-open"></i> Message
+                                <span class="badge badge-danger"> @ViewBag.MessageCount </span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Candidate"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Messages" asp-action="MyMessagesSentToMyResumes">
+                                <i class="icon-envelope-open"></i> Message
+                                <span class="badge badge-danger"> @ViewBag.MessageCount </span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Candidate"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Resumes" asp-action="MyResumes">
+                                <i class="icon-envelope-open"></i> Resumes
+
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Candidate"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="JobApplications" asp-action="MyJobApplications">
+                                <i class="icon-envelope-open"></i> Applications
+
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Company"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Jobs" asp-action="MyJobs">
+                                <i class="icon-envelope-open"></i> Jobs
+
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Company"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Companies" asp-action="MyCompanies">
+                                <i class="icon-envelope-open"></i> Company
+
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Company"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="JobApplications" asp-action="MyJobApplicants">
+                                <i class="icon-envelope-open"></i> Applicants
+                                <span class="badge badge-danger"> @ViewBag.jobApplicationCount </span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>
+                            <a href="/Admin">
+                                <i class="icon-user"></i> Admin Portal
+                            </a>
+                        </li>
+                    }
+                    <li class="divider"> </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
+                            <i class="icon-key"></i> Lockout
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav pull-right" style="margin-top:8px;">
+
+        <li>
+            <button type="button" onclick="window.location='/Resumes/Create'" class="btn btn-outline-info btn-sm">
+                <i class="icon-book-open"></i>
+                Create CV
+            </button>
+
+        </li>
+        <li style="margin-left:3px;">
+            <button type="button" onclick="window.location='/Jobs/Create'" class="btn btn-outline-info btn-sm">
+                <i class="icon-doc"></i>
+                Post Job
+            </button>
+
+        </li>
+        <li style="margin-left:10px;">
+            <button type="button" onclick="window.location='/Identity/Account/Login'" class="btn btn-primary btn-sm">
+                <i class="icon-briefcase"></i>
+                Login
+            </button>
+
+        </li>
+
+    </ul>
+}

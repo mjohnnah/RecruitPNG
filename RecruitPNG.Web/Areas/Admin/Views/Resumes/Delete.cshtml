@@ -1,0 +1,291 @@
+﻿@model RecruitPNG.Models.Resume
+
+@{
+    ViewData["Title"] = "Delete Resume - " + Model.ResumeName;
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ResumeName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ResumeName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Photo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaritalStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaritalStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MobilePhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MobilePhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalExperience)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalExperience)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UsingCigarette)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UsingCigarette)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsTravelDisabled)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsTravelDisabled)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDisabled)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDisabled)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSubsidized)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsSubsidized)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCurrentlyWorking)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsCurrentlyWorking)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSeekingJob)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsSeekingJob)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MilitaryStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MilitaryStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEducation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastEducation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastDepartment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastDepartment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GraduationYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GraduationYear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ForeignLanguages)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ForeignLanguages)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsApproved)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Occupation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Occupation.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Objective)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Objective)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.County)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.County.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Projects)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Projects)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Skills)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Skills)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hobbies)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hobbies)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DrivingLicense)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DrivingLicense)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Courses)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Courses)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Blog)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Blog)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkedIn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LinkedIn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GitHub)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GitHub)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dribbble)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dribbble)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Behance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Behance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Youtube)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Youtube)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Instagram)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Instagram)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Facebook)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Facebook)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Twitter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Twitter)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IPAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IPAddress)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> 
+        <a asp-action="Index"class="btn btn-sm btn-danger">Cancel</a>
+    </form>
+</div>

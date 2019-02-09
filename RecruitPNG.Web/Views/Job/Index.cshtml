@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RecruitPNG.Models.Job>
+@{
+    ViewData["Title"] = "Jobs";
+}
+<link href="~/assets/cdn/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/assets/cdn/responsive.dataTables.min.css" rel="stylesheet" />
+<div class="container">
+    <table id="tblRecords" class="table">
+        <thead>
+            <tr>
+                <th class="text-nowrap all">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th class="text-nowrap all">
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th class="text-nowrap all" data-orderable="false">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company.Name)
+                    </td>
+                    <td class="text-nowrap">
+                        @if (User.IsInRole("Candidate"))
+                        {
+                            <a asp-action="SendMessageToJob" asp-route-jobId="@item.Id" asp-controller="Messages" asp-area="" class="btn btn-outline-primary btn-sm">Send Message</a>
+                            <a asp-action="Apply" asp-route-jobid="@item.Id" asp-controller="Job" asp-area="" class="btn btn-primary btn-sm">Apply</a>
+                        }
+                        <a asp-action="Details" asp-route-id=@item.Id asp-controller="Job" asp-area="" class="btn btn-info btn-sm">Details</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script src="~/assets/cdn/jquery.dataTables.min.js"></script>
+    <script src="~/assets/cdn/dataTables.responsive.min.js"></script>
+    <script>$(document).ready(function () {
+            $('#tblRecords').DataTable({
+                responsive: true,
+
+            });
+        });</script>
+}

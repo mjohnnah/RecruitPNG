@@ -1,0 +1,65 @@
+﻿@model IEnumerable<RecruitPNG.Models.JobApplication>
+
+@{
+    ViewData["Title"] = "Applications";
+}
+
+@*relplace with aspnet paging*@
+<link href="~/assets/cdn/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/assets/cdn/responsive.dataTables.min.css" rel="stylesheet" />
+
+<table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Resume)
+            </th>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Job)
+            </th>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+
+            <th class="text-nowrap all" data-orderable="false"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-controller="Resumes" asp-route-id="@item.ResumeId">
+                        @Html.DisplayFor(modelItem => item.Resume.ResumeName)
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Jobs" asp-route-id="@item.JobId">
+                        @Html.DisplayFor(modelItem => item.Job.Title)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+
+                <td class="text-nowrap">
+                    <a asp-action="Details" asp-route-id=@item.Id asp-controller="Applications" asp-area="" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script src="~/assets/cdn/jquery.dataTables.min.js"></script>
+    <script src="~/assets/cdn/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                responsive: true,
+                "language":
+                    { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json" }
+            });
+        });
+    </script>
+}

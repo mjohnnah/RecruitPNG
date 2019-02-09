@@ -1,0 +1,40 @@
+﻿@model IEnumerable<RecruitPNG.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Users";
+}
+<p>
+    <a asp-controller="Account" asp-area="Identity" asp-action="Register" class="btn btn-sm btn-primary">Crete new</a>
+</p>
+<table class="table" id="tblRecords">
+    <thead>
+        <tr>
+            <th class="text-nowrap all">User Name</th>
+            <th class="text-nowrap all">Email</th>
+            <th class="text-nowrap">Email confirmed?</th>
+            <th class="text-nowrap all">Telephone</th>
+            <th class="text-nowrap">Phone confirmation?</th>
+            <th class="text-nowrap">Locked out?</th>
+            <th class="text-nowrap">Access fail count</th>
+            <th class="text-nowrap">Lock out end</th>
+            <th class="all"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.UserName</td>
+            <td>@item.Email</td>
+            <td>@(item.EmailConfirmed ? "Yes" : "No")</td>
+            <td>@item.PhoneNumber</td>
+            <td>@(item.PhoneNumberConfirmed ? "Yes" : "No")</td>
+            <td>@(item.LockoutEnabled ? "Yes" : "No")</td>
+            <td>@item.AccessFailedCount</td>
+            <td>@item.LockoutEnd</td>
+            <td class="text-nowrap"><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success">Edit</a> 
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" onclick="return confirm('You want delete this user?');">Delete</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+

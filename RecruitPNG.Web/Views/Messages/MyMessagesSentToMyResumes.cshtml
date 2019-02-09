@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RecruitPNG.Models.Message>
+@{
+    ViewData["Title"] = "Messages from Employers";
+}
+
+<link href="~/assets/cdn/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/assets/cdn/responsive.dataTables.min.css" rel="stylesheet" />
+<table id="tblRecords" class="table">
+    <thead>
+        <tr>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="text-nowrap all" data-orderable="false">Eylemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-controller="Companies" asp-route-id="@item.From"> @Html.DisplayFor(modelItem => item.FromName)</a>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td class="text-nowrap">
+
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Read</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script src="~/assets/cdn/jquery.dataTables.min.js"></script>
+    <script src="~/assets/cdn/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                responsive: true,
+                "language":
+                    { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json" }
+            });
+        });
+    </script>
+}

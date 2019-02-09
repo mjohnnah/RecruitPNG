@@ -1,0 +1,111 @@
+﻿@model RecruitPNG.Models.Company
+
+@{
+    ViewData["Title"] = "Details";
+}
+<link href="/assets/pages/css/blog.min.css" rel="stylesheet" type="text/css" />
+<div class="page-content-inner">
+    <div class="blog-page blog-content-2">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="blog-single-content bordered blog-container">
+                    <div class="blog-single-head">
+                        <h1 class="blog-single-head-title">@Model.Name</h1>
+                        @if (!string.IsNullOrEmpty(Model.Logo))
+                        {
+                            <img src="~/Uploads/Companies/@Model.Logo" width="150" class="pull-right" />
+                        }
+                    </div>
+
+                    <div class="blog-single-desc">
+
+                        @Html.Raw(Model.Description)
+                        <br />
+                        <fieldset>
+                            
+                            <legend>Contact</legend>
+                            <ul>
+                                <li>
+                                    <strong>Conatct person:</strong>
+                                    @Model.ContactName
+                                </li>
+                                <li>
+                                    <strong>Web Site:</strong>
+                                    <a href="@Model.Website">@Model.Website</a>
+                                </li>
+                                <li>
+                                    <strong>Adres:</strong>
+                                    @Model.Address
+                                    @Model.County?.Name/@Model.City?.Name
+                                    @Model.Country?.Name
+                                </li>
+                                
+                            </ul>
+                        </fieldset>
+                        <br />
+                        <fieldset>
+                            <legend>Vacancies</legend>
+                            <table id="myTable" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                           Advertised Positions
+                                        </th>
+
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Jobs)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+
+                                            <td>
+                                                <a asp-action="Details" asp-route-id=@item.Id asp-controller="Job" asp-area="" class="btn btn-info btn-sm">Details</a>
+                                                @if (User.IsInRole("Candidate"))
+                                                {
+                                                    <a asp-action="Apply" asp-route-id="@item.Id" asp-controller="Job" asp-area="" class="btn btn-primary btn-sm">Apply</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            
+                        </fieldset>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <div class="blog-single-sidebar bordered blog-container">
+                    <div>
+                        <h4>Other Details</h4>
+                    </div>
+                    <hr />
+                    <div class="blog-single-sidebar-recent">
+                        <p>
+                            <strong>Sector:</strong><br />@Model.Sector?.Name
+                        </p>
+                        
+                        
+                        <p>
+                            <strong>Date published:</strong><br />@string.Format("{0:dd.MM.yyyy}", Model.CreateDate)
+                        </p>
+                        
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>

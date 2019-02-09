@@ -1,0 +1,318 @@
+﻿@model RecruitPNG.Models.Resume
+
+@{
+    ViewData["Title"] = "Resume Details - " + Model.ResumeName;
+}
+<link href="/assets/pages/css/profile-2.min.css" rel="stylesheet" type="text/css" />
+<div class="page-content-inner">
+    <div class="profile">
+        <div class="tabbable-line tabbable-full-width">
+         
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1_1">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <ul class="list-unstyled profile-nav">
+                                <li>
+                                    @if (!string.IsNullOrEmpty(Model.Photo))
+                                    {
+                                        <img width="460" height="460" src="~/Uploads/Resumes/@Model.Photo" class="img-responsive pic-bordered" alt="" />
+                                    }
+                                    else
+                                    {
+                                        <img width="460" height="460" src="~/images/profil_foto.png" class="img-responsive pic-bordered" alt=""/> <br />
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12 profile-info bold">
+                                    <h1 class="font-green sbold uppercase"> @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h1>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                           @Model.Objective
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <legend>Kişisel Bilgiler</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Maritual Status</strong><br />
+                                                    @Html.DisplayFor(model => model.MaritalStatus)
+                                                </p>
+                                                <p>
+                                                    <strong>Gender</strong><br />
+                                                    @Html.DisplayFor(model => model.Gender)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Military Status</strong><br />
+                                                    @Html.DisplayFor(model=>model.MilitaryStatus)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
+                                        
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Contact Details</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Phone</strong><br />
+                                                    @if (User.IsInRole("Admin"))
+                                                    {<text>@Html.DisplayFor(model => model.MobilePhone)</text>}
+                                                else
+                                                { <text>*************</text> }
+                                                    </p>
+                                                <p>
+                                                    <strong>E-mail</strong><br />
+                                                    @if (User.IsInRole("Admin"))
+                                                    {<text>@Html.DisplayFor(model => model.Email)</text>}
+                                                else
+                                                { <text>*************</text>}
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Country</strong><br />
+                                                    @Html.DisplayFor(model => model.Country.Name)
+                                                </p>
+                                                <p>
+                                                    <strong>Province</strong><br />
+                                                    @Html.DisplayFor(model => model.City.Name)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Location</strong><br />
+                                                    @Html.DisplayFor(model=>model.County.Name)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>İş Deneyimleri</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Years of Experience</strong><br />
+                                                    @Html.DisplayFor(model => model.TotalExperience) Yıl
+                                                </p>
+                                                <p>
+                                                    <strong>Occupation</strong><br />
+                                                    @Html.DisplayFor(model => model.Occupation.Name)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Currently Working?</strong> <br />
+                                                    @Html.DisplayFor(model => model.IsCurrentlyWorking)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Education</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Last Education</strong><br />
+                                                    @Html.DisplayFor(model=>model.LastEducation)
+                                                </p>
+                                                <p>
+                                                    <strong>Last Department</strong><br />
+                                                    @Html.DisplayFor(model=>model.LastDepartment)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Year of Grduation</strong><br />
+                                                    @Html.DisplayFor(model=>model.GraduationYear)
+                                                </p>
+                                                <p>
+                                                    <strong>Foreign Languages</strong><br />
+                                                    @Html.DisplayFor(model=>model.ForeignLanguages)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Courses</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Courses undertaken</strong><br />
+                                                    @Html.DisplayFor(model => model.Courses)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Projects and Skills</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Projects</strong><br />
+                                                    @Html.DisplayFor(model=>model.Projects)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Skills</strong><br />
+                                                    @Html.DisplayFor(model=>model.Skills)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Social Network</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Social Media Links</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Blog</strong><br />
+                                                    @Html.DisplayFor(model => model.Blog)
+                                                </p>
+                                                <p>
+                                                    <strong>Linkedin</strong><br />
+                                                    @Html.DisplayFor(model => model.LinkedIn)
+                                                </p>
+                                                <p>
+                                                    <strong>Github</strong><br />
+                                                    @Html.DisplayFor(model => model.GitHub)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Dribbble</strong><br />
+                                                    @Html.DisplayFor(model=>model.Dribbble)
+                                                </p>
+                                                <p>
+                                                    <strong>Behance</strong><br />
+                                                    @Html.DisplayFor(model=>model.Behance)
+                                                </p>
+                                                <p>
+                                                    <strong>Youtube</strong><br />
+                                                    @Html.DisplayFor(model=>model.Youtube)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Instagram</strong><br />
+                                                    @Html.DisplayFor(model=>model.Instagram)
+                                                </p>
+                                                <p>
+                                                    <strong>Facebook</strong><br />
+                                                    @Html.DisplayFor(model=>model.Facebook)
+                                                </p>
+                                                <p>
+                                                    <strong>Twitter</strong><br />
+                                                    @Html.DisplayFor(model=>model.Twitter)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Other Information</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Driving Lisence</strong><br />
+                                                    @Html.DisplayFor(model=>model.DrivingLicense)
+                                                </p>
+                                                <p>
+                                                    <strong>Hobbies</strong><br />
+                                                    @Html.DisplayFor(model=>model.Hobbies)
+                                                </p>
+
+                                                <p>
+                                                    <strong>Are your currently seeking job?</strong><br />
+                                                    @Html.DisplayFor(model => model.IsSeekingJob)
+                                                </p>
+                                                
+                                                
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Are are smoker?</strong><br />
+                                                    @Html.DisplayFor(model => model.UsingCigarette)
+                                                </p>
+                                                <p>
+                                                    <strong>Approval?</strong><br />
+                                                    @Html.DisplayFor(model => model.IsApproved)
+                                                </p>
+                                                <p>
+                                                    <strong>Active?</strong><br />
+                                                    @Html.DisplayFor(model => model.IsActive)
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>
+                                                    <strong>Trvel Disability?</strong><br />
+                                                    @Html.DisplayFor(model => model.IsTravelDisabled)
+                                                </p>
+                                                <p>
+                                                    <strong>Disability?</strong><br />
+                                                    @Html.DisplayFor(model => model.IsDisabled)
+                                                </p>
+                                                <p>
+                                                    <strong>Receive Subsidy?</strong><br />
+                                                    @Html.DisplayFor(model => model.IsSubsidized)
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            
+                                <!--end row-->
+                                
+                            </div>
+                    </div>
+                </div>
+                <!--tab_1_2-->
+                <!--end tab-pane-->
+                <!--end tab-pane-->
+            </div>
+        </div>
+    </div>
+</div>

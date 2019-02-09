@@ -1,0 +1,140 @@
+﻿@model RecruitPNG.Models.Job
+
+@{
+    ViewData["Title"] = "Create Job";
+}
+<br />
+<div>
+    <form asp-action="Create" onsubmit="formSubmit()">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">Position Title</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Position Description</label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <label asp-for="CountryId" class="control-label"></label>
+                    <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId">
+                        <option value="">Select country..</option>
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+                <div class="form-group ">
+                    <label asp-for="CompanyId" class="control-label"></label>
+                    <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.CompanyId">
+                        <option value="">Select company..</option>
+                    </select>
+                    <span asp-validation-for="CompanyId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group ">
+                    <label asp-for="CityId" class="control-label"></label>
+                    <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId" onchange="CityChange(this)">
+                        <option value="">Select province..</option>
+                    </select>
+                    <span asp-validation-for="CityId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CountyId" class="control-label"></label>
+                    <select asp-for="CountyId" class="form-control" asp-items="ViewBag.CountyId">
+                        <option value="">Select job location..</option>
+                    </select>
+                    <span asp-validation-for="CountyId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="PublishDate" class="control-label"></label>
+                    <input asp-for="PublishDate" class="form-control" />
+                    <span asp-validation-for="PublishDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label>
+                            <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input asp-for="CreateDate" type="hidden" />
+        <input asp-for="CreatedBy" type="hidden" />
+        <input asp-for="UpdateDate" type="hidden" />
+        <input asp-for="UpdatedBy" type="hidden" />
+        <input asp-for="IPAddress" type="hidden" />
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-success btn-sm" />  <a asp-action="Index" asp-controller="Jobs" asp-area="" class="btn btn-warning btn-sm">Cancel</a>
+        </div>
+
+
+
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function CountryChange(elm) {
+        $.get('@Url.Action("GetCities", "Jobs")', { countryId: $(elm).val() }, function (data) {
+        var $select = $("#CountyId");
+        $select.empty();
+        $select.append('<option value="">Select province..</option>');
+        $.each(data, function (key, value) {
+        $select.append('<option value="' + value.id + '">' + value.name + '</option>');
+        });
+        });
+        }
+
+        function CityChange(elm) {
+            $.get('@Url.Action("GetCounties","Jobs")', { cityId: $(elm).val() }, function (data) {
+                var $select = $("#CountId");
+                $select.empty();
+                $select.append('<option value="">Select work location..</option>');
+                $.each(data, function (key, value) {
+                    $select.append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+            });
+        }
+    </script>
+    <script src="~/assets/ckeditor5/ckeditor.js"></script>
+    <script>
+        var editor;
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(newEditor => {
+                editor = newEditor;
+                editor.setData($("#Description").val());
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        function formSubmit() {
+            $("#Description").val(editor.getData());
+        }
+    </script>
+}

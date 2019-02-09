@@ -1,0 +1,63 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "Message details";
+}
+
+<link href="/assets/pages/css/blog.min.css" rel="stylesheet" type="text/css" />
+<div class="page-content-inner">
+    <div class="blog-page blog-content-2">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="blog-single-content bordered blog-container">
+                    <div class="blog-single-head">
+                        <h1 class="blog-single-head-title">@Model.Title</h1>
+                        <p> <strong>From:</strong> @Model.FromName</p>
+                        <p>
+                            <strong>Date:</strong> @Model.CreateDate
+                        </p>
+                    </div>
+                    <strong>Message:</strong>
+                    <div class="blog-single-desc">
+                        <p>
+                            @Html.Raw(Model.Description)
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<!----------------improve reply---------------------->
+
+<hr />
+<br />
+
+<div>
+    <fieldset>
+        <legend>Reply:</legend>
+        <form action="@(User.IsInRole("Candidate")?Url.Action("SendMessageToCompany"):Url.Action("SendMessageToResume"))" method="post">
+            <input type="hidden" name="To" value="@Model.From" />
+            <input type="hidden" name="From" value="@Model.To" />
+            <input asp-for="From" type="hidden" value="(From)" />
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" readonly />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea name="Description" class="form-control" rows="8"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-sm">Reply</button>
+                <a href="javascript:void(0);" onclick="history.back();" class="btn btn-danger btn-sm">Back</a>
+            </div>
+        </form>
+    </fieldset>
+
+</div>
+

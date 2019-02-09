@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Application submitted";
+}
+<p>
+    Your job application was submitted successfully.
+    @if (User.IsInRole("Candidate"))
+    {
+
+        <a asp-area="" asp-controller="JobApplications" asp-action="MyJobApplications">
+            View your job applications
+        </a>
+
+    }
+</p>

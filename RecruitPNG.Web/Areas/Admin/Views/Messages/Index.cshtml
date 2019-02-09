@@ -1,0 +1,93 @@
+﻿@model IEnumerable<RecruitPNG.Models.Message>
+
+@{
+    ViewData["Title"] = "Messages";
+}
+
+<p>
+    <a asp-action="Create"class="btn btn-sm btn-primary">Create message</a>
+</p>
+<table class="table" id="tblRecords">
+    <thead>
+        <tr>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.FromName)
+            </th>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.ToName)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsRead)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsApproved)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.IPAddress)
+            </th>
+            <th class="text-nowrap all" data-orderable="false">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRead)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IPAddress)
+            </td>
+            <td class="text-nowrap">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

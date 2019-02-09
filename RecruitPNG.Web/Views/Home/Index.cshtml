@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "RecruitPNG";
+}
+<link href="/assets/pages/css/search.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/pages/css/about.css" rel="stylesheet" type="text/css" />
+<link href="~/css/custom.css" rel="stylesheet" type="text/css" />
+@section Slider {
+    <!-- BEGIN PAGE TITLE -->
+    <div class="row margin-bottom-40 about-header">
+        <div class="col-md-12">
+            <h1>Complete recruitment portal</h1>
+            <h2>We do much more than just bringing job seekers and employers togather</h2>
+            <a asp-action="Create" asp-controller="Resumes" class="btn btn-outline-info">Create your resume</a>
+        </div>
+    </div>
+}
+<!-- END PAGE BREADCRUMBS -->
+<div class="search-page search-content-4">
+    <div class="search-bar bordered">
+        <form method="get">
+            <div class="row">
+                <div class="col-sm-2" style="padding-top:15px">
+                    <label for="search" class="control-label uppercase bold pull-right">Search by title</label>
+                </div>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter job title to search..." id="search" name="search" value="@ViewBag.Search">
+                        <span class="input-group-btn">
+                            <button class="btn green-soft uppercase bold btn-info" type="submit">Search</button>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="col-sm-2 extra-buttons">
+                    <button class="btn grey-steel uppercase bold" type="submit" onclick="$('#search').val('')">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="search-table table-responsive">
+        <h3 style="text-align:center">
+            @if (string.IsNullOrEmpty(ViewBag.search))
+            {<text>Featured Jobs</text>}
+        else
+        {<text>Search Results</text>}
+    </h3>
+    <table class="table table-bordered table-striped table-condensed">
+        <thead class="bg-blue">
+            <tr>
+                <th>
+                    <a href="javascript:;">Logo</a>
+                </th>
+                <th>
+                    <a href="javascript:;">Employer</a>
+                </th>
+                <th>
+                    <a href="javascript:;">Position</a>
+                </th>
+                <th>
+                    <a href="javascript:;">Location</a>
+                </th>
+                <th><a href="javascript:;">Action</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (((IEnumerable<RecruitPNG.Models.Job>)ViewBag.FeaturedJobs).Count() > 0)
+            {
+                @foreach (var item in (IEnumerable<RecruitPNG.Models.Job>)ViewBag.FeaturedJobs)
+                {
+                    <tr>
+                        <td>
+                            <a href="javascript:;">
+                                <img src="~/Uploads/Companies/@item.Company?.Logo" alt="@item.Company?.Name" width="80" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Companies" asp-action="Details" asp-route-id="@item.CompanyId">@item.Company?.Name</a>
+                        </td>
+                        <td>
+                            <strong>
+                                <a asp-action="Details" asp-controller="Job" asp-route-id="@item.Id">@item.Title</a>
+                            </strong>
+                        </td>
+                        <td> @item.Company?.County?.Name </td>
+                        <td>
+                            <a asp-action="Apply" asp-controller="Job" asp-route-jobid="@item.Id" class="btn btn-sm btn-primary">
+                                Apply
+                            </a>
+                            <a asp-action="SendMessageToJob" asp-controller="Messages" asp-route-jobId="@item.Id" class="btn btn-sm btn-success">
+                                Send message
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.search))
+            {
+                <tr>
+                    <td colspan="5">Your search results...</td>
+                </tr>
+
+            }
+            else
+            {
+
+                <tr>
+                    <td colspan="5">No job found...</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>

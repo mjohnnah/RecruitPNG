@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<RecruitPNG.Models.ApplicationUser> SignInManager
+@inject UserManager<RecruitPNG.Models.ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var profilePhoto = UserManager.Users.FirstOrDefault(f => f.UserName == User.Identity.Name)?.Photo;
+    if (string.IsNullOrEmpty(profilePhoto))
+    {
+        profilePhoto = "/images/profil_foto.png";
+    }
+    else
+    {
+        profilePhoto = "/uploads/profiles/" + profilePhoto;
+    }
+<li class="dropdown dropdown-user">
+    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <img alt="Profil Fotoğrafım" class="img-circle" src="@profilePhoto"  style="width:40px;" />
+        @{
+            var usr = await UserManager.FindByNameAsync(User.Identity.Name);
+        }
+        @if (usr != null && !string.IsNullOrEmpty(usr.FullName))
+        {
+            <span class="username username-hide-on-mobile"> @usr.FullName </span>
+
+        }
+        else
+        {
+            <span class="username username-hide-on-mobile"> @UserManager.GetUserName(User) </span>
+        }
+
+        <i class="fa fa-angle-down"></i>
+    </a>
+
+
+
+    <ul class="dropdown-menu dropdown-menu-default">
+        <li>
+            <a href="/Identity/Account/Manage">
+                <i class="icon-user"></i> Profile
+            </a>
+        </li>     
+       
+        <li>
+            <a href="/">
+                <i class="icon-user"></i> Public UI
+            </a>
+        </li>
+        <li class="divider"> </li>
+        <li>
+            <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
+                <i class="icon-key"></i> Lockout
+            </a>
+        </li>
+    </ul>
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right"></form>
+</li>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+}

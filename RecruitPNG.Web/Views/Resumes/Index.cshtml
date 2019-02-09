@@ -1,0 +1,97 @@
+﻿@model IEnumerable<RecruitPNG.Models.Resume>
+@{
+    ViewData["Title"] = "Resumes";
+}
+<link href="~/assets/cdn/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/assets/cdn/responsive.dataTables.min.css" rel="stylesheet" />
+<table id="tblRecords" class="table">
+    <thead>
+        <tr>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.TotalExperience)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsCurrentlyWorking)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsSeekingJob)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.LastEducation)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.LastDepartment)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.GraduationYear)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.ForeignLanguages)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Occupation)
+            </th>
+
+            <th class="text-nowrap all" data-orderable="false">Eylemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalExperience)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCurrentlyWorking)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSeekingJob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastEducation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastDepartment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GraduationYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForeignLanguages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Occupation.Name)
+                </td>
+                <td>
+                    <div class="text-nowrap">
+                        <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Resumes" class="btn btn-success btn-sm"><i class="fa fa-trash"></i>Details</a>
+                        @if (User.IsInRole("Company"))
+                        {
+                            <a asp-action="SendMessageToResume" asp-controller="Messages" asp-route-resumeId="@item.Id" class="btn btn-warning btn-sm"><i class="fa fa-envelope-o"></i>Send Message</a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script src="~/assets/cdn/jquery.dataTables.min.js"></script>
+    <script src="~/assets/cdn/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                responsive: true,
+                "language":
+                    { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json" }
+            });
+        });
+    </script>
+}

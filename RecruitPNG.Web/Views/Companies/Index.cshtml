@@ -1,0 +1,68 @@
+﻿@model IEnumerable<RecruitPNG.Models.Company>
+
+@{
+    ViewData["Title"] = "Companies";
+}
+<link href="~/assets/cdn/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/assets/cdn/responsive.dataTables.min.css" rel="stylesheet" />
+
+<table id="tblRecords" class="table">
+    <thead>
+        <tr>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.County)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Sector)
+            </th>
+            <th class="text-nowrap all" data-orderable="false"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-nowrap">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.County.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sector.Name)
+                </td>
+
+            <td class="text-nowrap">
+                <a asp-action="Details" asp-controller="Companies" asp-route-Id="@item.Id" class="btn btn-default btn-sm">Details</a>
+                @if (User.IsInRole("Candidate")) { 
+                <a asp-action="SendMessageToCompany" asp-controller="Messages" asp-route-companyId="@item.Id" class="btn btn-warning btn-sm"><i class="fa fa-envelope-o"></i>Send message</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/assets/cdn/jquery.dataTables.min.js"></script>
+    <script src="~/assets/cdn/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblRecords').DataTable({
+                responsive: true,
+                
+            });
+        });
+    </script>
+}

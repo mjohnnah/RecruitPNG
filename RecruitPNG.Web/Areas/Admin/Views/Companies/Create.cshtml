@@ -1,0 +1,151 @@
+﻿@model RecruitPNG.Models.Company
+
+@{
+    ViewData["Title"] = "Create Compnay";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" onsubmit="formSubmit()" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryId" class="control-label"></label>
+                <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId" onchange="CountryChange(this)">
+                    <option value="">Ülke Seçiniz</option>
+                </select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityId" class="control-label"></label>
+                <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId" onchange="CityChange(this)">
+                    <option value="">Şehir Seçiniz</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountyId" class="control-label"></label>
+                <select asp-for="CountyId" class="form-control" asp-items="ViewBag.CountyId">
+                    <option value="">İlçe Seçiniz</option>
+                </select>
+                <span asp-validation-for="CountyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SectorId" class="control-label"></label>
+                <select asp-for="SectorId" class="form-control" asp-items="ViewBag.SectorId">
+                    <option value="">Sektör Seçiniz</option>
+                </select>
+                <span asp-validation-for="SectorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label>
+                        <input asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label>
+                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactName" class="control-label"></label>
+                <input asp-for="ContactName" class="form-control" />
+                <span asp-validation-for="ContactName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Logo" type="hidden" />
+                <label asp-for="Logo" class="control-label"></label>
+                @if (!string.IsNullOrEmpty(Model.Logo))
+                {
+                    <img src="~/Uploads/Companies/@Model.Logo" width="50" />
+                }
+                <input name="File" type="file" class="form-control" />
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Website" class="control-label"></label>
+                <input asp-for="Website" class="form-control" />
+                <span asp-validation-for="Website" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="CreateDate" class="form-control" />
+            <input type="hidden" asp-for="CreatedBy" class="form-control" />
+            <input type="hidden" asp-for="UpdateDate" class="form-control" />
+            <input type="hidden" asp-for="UpdatedBy" class="form-control" />
+            <input type="hidden" asp-for="IPAddress" class="form-control" />
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                <a asp-action="Index" class="btn btn-sm btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.ckeditor.com/ckeditor5/10.1.0/classic/ckeditor.js"></script>
+    <script>
+        var editor;
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(newEditor => {
+                editor = newEditor;
+                editor.setData($("#Description").val());
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        function formSubmit() {
+            $("#Description").val(editor.getData());
+        }
+        function CountryChange(elm) {
+            $.get('@Url.Action("GetCities","Companies")', { countryId: $(elm).val() }, function (data) {
+                var $select = $("#CityId");
+                $select.empty();
+                $select.append('<option value="">Select province..</option>');
+                $.each(data, function (key, value) {
+                    $select.append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+            });
+        }
+
+        function CityChange(elm) {
+            $.get('@Url.Action("GetCounties","Companies")', { cityId: $(elm).val() }, function (data) {
+                var $select = $("#CountyId");
+                $select.empty();
+                $select.append('<option value="">Select location..</option>');
+                $.each(data, function (key, value) {
+                    $select.append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+            });
+        }
+    </script>
+}

@@ -1,0 +1,61 @@
+﻿@model RecruitPNG.Models.Job
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link href="/assets/pages/css/blog.min.css" rel="stylesheet" type="text/css" />
+
+
+<div class="page-content-inner container">
+    <h2>Job Details</h2>
+    <br />
+    <div class="blog-page blog-content-2">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="blog-single-content bordered blog-container">
+                    <div class="blog-single-head">
+                        <h1 class="blog-single-head-title">@Model.Title</h1>
+                        <div class="blog-single-head-date">
+                            <i class="icon-calendar font-blue"></i>
+                            <a href="javascript:;">@string.Format("{0:dd.MM.yyyy}", Model.PublishDate)</a>
+                        </div>
+                    </div>
+                   
+                    <div class="blog-single-desc">
+                        <p>
+                         @Html.Raw(Model.Description)
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="blog-single-sidebar bordered blog-container">
+                    <div>
+                       <h4>Other details</h4>
+                    </div>
+                    <hr />
+                    <div class="blog-single-sidebar-recent">
+                        <p>
+                            <strong>Date published:</strong><br />@string.Format("{0:dd.MM.yyyy}", Model.PublishDate)
+                        </p>
+                        <p>
+                            <strong>End date:</strong><br />@string.Format("{0:dd.MM.yyyy}", Model.EndDate)
+                        </p>
+                        <p>
+                            <strong>Date created:</strong><br />@string.Format("{0:dd.MM.yyyy}", Model.CreateDate)
+                        </p>
+                        <p>
+                            <strong>Compnay:</strong><br /><a asp-controller="Companies" asp-action="Details" asp-route-id="@Model.CompanyId">@Model.Company?.Name</a>
+                        </p>
+
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

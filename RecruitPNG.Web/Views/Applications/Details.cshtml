@@ -1,0 +1,125 @@
+﻿@model RecruitPNG.Models.JobApplication
+
+@{
+    ViewData["Title"] = "Application Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="/assets/pages/css/blog.min.css" rel="stylesheet" type="text/css" />
+<div class="page-content-inner">
+    <div class="blog-page blog-content-2">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="blog-single-content bordered blog-container">
+                    <div class="blog-single-head">
+                        <h1 class="blog-single-head-title">@Model.Title</h1>
+                        <div class="blog-single-head-date">                            
+                            <p>Date:@string.Format("{0:dd.MM.yyyy}", Model.CreateDate)</p>
+                            <p>
+                                Resume: @Model.Resume.ResumeName
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="blog-single-desc">
+                        <p>
+                            @Html.Raw(Model.Description)
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="blog-single-sidebar bordered blog-container">
+                    <div>
+                        <h4>İlan Detayları</h4>
+                    </div>
+                    <hr />
+                    <div class="blog-single-sidebar-recent">
+                        <p>
+                            <strong>Date applied:</strong><br />@string.Format("{0:dd.MM.yyyy}", Model.CreateDate)
+                        </p>
+                        <p>
+                            <strong>Email:</strong><br />@string.Format("{0:dd.MM.yyyy}", Model.CreatedBy)
+                        </p>
+                        <p>
+                            <strong>Date created:</strong><br />@string.Format("{0:dd.MM.yyyy}", Model.Resume.ResumeName)
+                        </p>
+                        <p>
+                            @*<strong>Compnay:</strong><br /><a asp-controller="Companies" asp-action="Details" asp-route-id="@Model.CompanyId">@Model.Company?.Name</a>*@
+                        </p>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <h4>JobApplication</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Resume)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Resume.ResumeName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Job)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Job.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.Raw(Model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IPAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IPAddress)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

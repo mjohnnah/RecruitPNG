@@ -1,0 +1,302 @@
+﻿@model IEnumerable<RecruitPNG.Models.Resume>
+
+@{
+    ViewData["Title"] = "Resumes";
+}
+<p>
+	<a asp-action="Create" class="btn btn-sm btn-primary">Create new</a>
+</p>
+<table id="tblRecords" class="table">
+    <thead>
+        <tr>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.ResumeName)
+            </th>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.MaritalStatus)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.MobilePhone)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.TotalExperience)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.UsingCigarette)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsTravelDisabled)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsDisabled)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsSubsidized)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsCurrentlyWorking)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsSeekingJob)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.MilitaryStatus)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.LastEducation)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.LastDepartment)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.GraduationYear)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.ForeignLanguages)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsApproved)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Occupation)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Objective)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.County)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Projects)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Skills)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Hobbies)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.DrivingLicense)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Courses)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Blog)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.LinkedIn)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.GitHub)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Dribbble)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Behance)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Youtube)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Instagram)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Facebook)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Twitter)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th class="text-nowrap never">
+                @Html.DisplayNameFor(model => model.IPAddress)
+            </th>
+            <th class="text-nowrap all">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResumeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td class="all">
+                <img style="width:50px;" src="~/Uploads/Resumes/@item.Photo" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaritalStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalExperience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsingCigarette)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsTravelDisabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDisabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSubsidized)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCurrentlyWorking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSeekingJob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MilitaryStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEducation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastDepartment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraduationYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForeignLanguages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Occupation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Objective)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.County.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Projects)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hobbies)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrivingLicense)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Courses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Blog)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LinkedIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GitHub)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dribbble)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Behance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Youtube)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instagram)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Facebook)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Twitter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IPAddress)
+            </td>
+            <td class="text-nowrap">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-default">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
